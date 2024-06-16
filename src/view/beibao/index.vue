@@ -57,6 +57,16 @@
         </div>
       </div>
     </div>
+    <el-dialog :title="`答案: ${maxValue}`" :visible.sync="dialogVisible">
+      <p>物品:</p>
+      <ol>
+        <li v-for="(item,index) in answerFruits" :key="index">{{item.name}}:{{item.quantity}}</li>
+      </ol>
+    </el-dialog>
+<!--    //播放音乐-->
+    <audio ref="audioPlayer" :loop="true">
+      <source src="static/beibao/大香蕉.mp3"  type="audio/mpeg" >
+    </audio>
   </div>
 </template>
 
@@ -74,6 +84,8 @@ export default {
       difficulty: 10,
       //背包容量
       capacity: '',
+      dialogVisible: false,
+      answerFruits: [],
     }
   },
   computed:{
@@ -83,7 +95,14 @@ export default {
         sum += item.price * item.answer;
       });
       return sum;
-    }
+    },
+    maxValue(){
+      let sum = 0;
+      this.answerFruits.forEach(item => {
+        sum += item.price * item.quantity;
+      });
+      return sum;
+    },
   },
   methods:{
     startGame(){
@@ -112,19 +131,34 @@ export default {
       this.bagSize = result.bagSize;
     },
     restartGame() {
+      //重新开始游戏,停止播放音乐(不是暂停)
+      this.$refs.audioPlayer.pause();
+      this.$refs.audioPlayer.currentTime = 0;
       this.gameStart = false;
       this.items = [];
     },
     submit(){
       //提交答案
-      console.log(this.capacity)
       const res = knapsack({fruits: this.items,bagSize: this.capacity});
-      this.$message.success(res);
+      let score = this.bagValue / res.value;
+      //分数是百分比的整数
+      score = Math.floor(score * 100);
+      this.$message.success(`您的得分为:${score}`);
+
     },
     checkAnswer(){
-      console.log(this.items)
+      //查看答案
+      const res = knapsack({fruits: this.items,bagSize: this.capacity});
+      this.answerFruits = res.answer;
+      this.dialogVisible = true;
     },
     calculate(item){
+      //在大香蕉没有播放音乐的时候,如果选择了大香蕉,则播放音乐
+      if(item.name === '香蕉' && item.answer > 0){
+        this.$refs.audioPlayer.play();
+      }else if(item.name === '香蕉' && item.answer === 0){
+        this.$refs.audioPlayer.pause();
+      }
       //计算背包剩余容量
       let sum = 0;
       this.items.forEach(item => {

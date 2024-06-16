@@ -1,3 +1,4 @@
+// import {log} from "shelljs/src/common";
 
 export function knapsack(list) {  //获取最大价值,并返回每种水果的数量,参数是水果的数组
   // const n = list.fruits.length
@@ -7,7 +8,7 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
   const bagSize = list.bagSize
   //获取一份list对象的副本
   const data = JSON.parse(JSON.stringify(list))
-  console.log(data.fruits)
+  //把水果分成多份,每份数量是2的幂次方
   for(let i=0;i<list.fruits.length;i++){
     let k = 1
     while(k<=data.fruits[i].quantity){
@@ -19,12 +20,10 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
         index : i,
         quantity:k
       }
-      console.log(fruit)
       fruits.push(fruit)
       k *= 2
     }
     if(data.fruits[i].quantity>0){
-      console.log(data.fruits[i])
       let fruit = {
         name:data.fruits[i].name,
         price:data.fruits[i].price*data.fruits[i].quantity,
@@ -38,13 +37,16 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
 
   const n = fruits.length
   const dp = []
+  const selected = []  //记录哪些水果被选中
   for(let i=0;i<=n+1;i++){
     dp.push([])
+    selected.push([])
   }
   //初始化
   for(let i=0;i<=n;i++){
     for(let j=0;j<=bagSize;j++){
       dp[i][j] = 0
+      selected[i][j] = false
     }
   }
 
@@ -57,10 +59,39 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
     for(let j=0;j<=bagSize;j++){
       if(j>=fruits[i-1].volume){
         dp[i][j] = Math.max(dp[i-1][j],dp[i-1][j-fruits[i-1].volume]+fruits[i-1].price)
+        if(dp[i][j] === dp[i-1][j-fruits[i-1].volume]+fruits[i-1].price){
+          selected[i][j] = true
+        }
       }else{
         dp[i][j] = dp[i-1][j]
       }
     }
   }
-  return dp[n][bagSize]
+  //获取每种水果的数量
+  const result = []
+  for(let i=n,j=bagSize;i>0;i--){
+    if(selected[i][j]){
+      result.push(fruits[i-1])
+      j -= fruits[i-1].volume
+    }
+  }
+  const answer = []
+  data.fruits.forEach((item)=>{
+    answer.push({
+      name:item.name,
+      volume:item.volume,
+      price:item.price,
+      quantity:0
+    })
+  })
+  result.forEach((item)=>{
+    answer[item.index].quantity += item.quantity
+  })
+  console.log(answer)
+
+
+  return {
+    value:dp[n][bagSize],  //最大价值
+    answer:answer  //每种水果的数量
+  }
 }
