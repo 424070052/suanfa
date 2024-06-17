@@ -15,7 +15,7 @@
       </div>
       <div style="text-align: center;">
         <router-link to="/Sudoku" >
-          <img src="static/beibao/index.jpg" alt="" class="navImg">
+          <img src="static/beibao/数独.jpg" alt="" class="navImg">
           <div>数独</div>
         </router-link>
       </div>
