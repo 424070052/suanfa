@@ -1,16 +1,22 @@
 <template>
   <div class="outContainer">
     <div id="nav">
-      <router-link to="/beibao" style="text-align: center;">
-        <img src="static/beibao/index.jpg" alt="" class="navImg">
-        <div>背包问题</div>
-      </router-link>
-      <router-link to="/short" style="text-align: center;">
-        <img src="static/beibao/index.jpg" alt="" class="navImg">
-        <div>最短问题</div>
-      </router-link>
+      <div style="text-align: center;">
+        <router-link to="/beibao" >
+          <img src="static/beibao/index.jpg" alt="" class="navImg">
+          <div>背包问题</div>
+        </router-link>
+      </div>
+      <div style="text-align: center;">
+        <router-link to="/short" >
+          <img src="static/beibao/index.jpg" alt="" class="navImg">
+          <div>最短问题</div>
+        </router-link>
+      </div>
     </div>
-    <router-view/>
+    <div>
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -35,7 +41,7 @@ export default {
   width: 100%;
   height:100vh;
   /* //下面的div居中对其 */
-  display: flex;
+  /* display: flex; */
 }
 .container{
   background-color: #f0f0f0;

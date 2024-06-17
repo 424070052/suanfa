@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="short">
     <h1>最短路径问题游戏</h1>
     <div class="graph-container">
       <svg ref="svgContainer" width="800" height="600"></svg>
@@ -175,7 +175,7 @@ export default {
 </script>
 
 <style>
-#app {
+#short {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
   margin-top: 20px;
@@ -186,7 +186,7 @@ export default {
   border: 1px solid #ccc;
   width: 800px;
   height: 600px;
-  position: relative;
+  /* position: relative; */
 }
 
 .controls {
