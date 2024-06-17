@@ -9,7 +9,7 @@
       </div>
       <div style="text-align: center;">
         <router-link to="/short" >
-          <img src="static/beibao/index.jpg" alt="" class="navImg">
+          <img src="static/beibao/最短路径.jpg" alt="" class="navImg">
           <div>最短问题</div>
         </router-link>
       </div>
