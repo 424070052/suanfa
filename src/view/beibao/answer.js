@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // import {log} from "shelljs/src/common";
+=======
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
 
 export function knapsack(list) {  //获取最大价值,并返回每种水果的数量,参数是水果的数组
   // const n = list.fruits.length
@@ -8,7 +11,11 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
   const bagSize = list.bagSize
   //获取一份list对象的副本
   const data = JSON.parse(JSON.stringify(list))
+<<<<<<< HEAD
   //把水果分成多份,每份数量是2的幂次方
+=======
+  console.log(data.fruits)
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
   for(let i=0;i<list.fruits.length;i++){
     let k = 1
     while(k<=data.fruits[i].quantity){
@@ -20,10 +27,18 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
         index : i,
         quantity:k
       }
+<<<<<<< HEAD
+=======
+      console.log(fruit)
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
       fruits.push(fruit)
       k *= 2
     }
     if(data.fruits[i].quantity>0){
+<<<<<<< HEAD
+=======
+      console.log(data.fruits[i])
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
       let fruit = {
         name:data.fruits[i].name,
         price:data.fruits[i].price*data.fruits[i].quantity,
@@ -37,16 +52,24 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
 
   const n = fruits.length
   const dp = []
+<<<<<<< HEAD
   const selected = []  //记录哪些水果被选中
   for(let i=0;i<=n+1;i++){
     dp.push([])
     selected.push([])
+=======
+  for(let i=0;i<=n+1;i++){
+    dp.push([])
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
   }
   //初始化
   for(let i=0;i<=n;i++){
     for(let j=0;j<=bagSize;j++){
       dp[i][j] = 0
+<<<<<<< HEAD
       selected[i][j] = false
+=======
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
     }
   }
 
@@ -59,14 +82,18 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
     for(let j=0;j<=bagSize;j++){
       if(j>=fruits[i-1].volume){
         dp[i][j] = Math.max(dp[i-1][j],dp[i-1][j-fruits[i-1].volume]+fruits[i-1].price)
+<<<<<<< HEAD
         if(dp[i][j] === dp[i-1][j-fruits[i-1].volume]+fruits[i-1].price){
           selected[i][j] = true
         }
+=======
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
       }else{
         dp[i][j] = dp[i-1][j]
       }
     }
   }
+<<<<<<< HEAD
   //获取每种水果的数量
   const result = []
   for(let i=n,j=bagSize;i>0;i--){
@@ -94,4 +121,7 @@ export function knapsack(list) {  //获取最大价值,并返回每种水果的�
     value:dp[n][bagSize],  //最大价值
     answer:answer  //每种水果的数量
   }
+=======
+  return dp[n][bagSize]
+>>>>>>> c42c92219fc179164a83d93a1f728307be5592c6
 }

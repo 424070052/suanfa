@@ -5,6 +5,10 @@
         <img src="static/beibao/index.jpg" alt="" class="navImg">
         <div>背包问题</div>
       </router-link>
+      <router-link to="/short" style="text-align: center;">
+        <img src="static/beibao/index.jpg" alt="" class="navImg">
+        <div>最短问题</div>
+      </router-link>
     </div>
     <router-view/>
   </div>
@@ -30,7 +34,7 @@ export default {
 .outContainer{
   width: 100%;
   height:100vh;
-  //下面的div居中对其
+  /* //下面的div居中对其 */
   display: flex;
 }
 .container{
@@ -44,9 +48,9 @@ export default {
   background-color: #aaaaaa;
   width: 100%;
   height: 84px;
-  //position: fixed;
+  /* //position: fixed;
   //top: 0;
-  //left: 0;
+  //left: 0; */
   display: flex;
   justify-content: space-around;
   align-items: center;
