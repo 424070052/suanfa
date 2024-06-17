@@ -21,7 +21,12 @@ export default new Router({
           path:'short',
           name:'short',
           component: () => import('@/view/short/short.vue')
-        }
+        },
+        {
+          path:'Sudoku',
+          name:'Sudoku',
+          component: () => import('@/view/Sudoku/Sudoku')
+        },
       ]
     }
   ]
