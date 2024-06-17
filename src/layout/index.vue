@@ -13,6 +13,12 @@
           <div>最短问题</div>
         </router-link>
       </div>
+      <div style="text-align: center;">
+        <router-link to="/Sudoku" >
+          <img src="static/beibao/index.jpg" alt="" class="navImg">
+          <div>数独</div>
+        </router-link>
+      </div>
     </div>
     <div>
       <router-view/>
